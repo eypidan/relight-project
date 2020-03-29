@@ -13,14 +13,14 @@ plt.subplot(231);plt.imshow(convert(low_img))
 plt.subplot(232);plt.imshow(convert(normal))
 
 # White balance
-wb = cv.xphoto.createSimpleWB()
-wb_img = wb.balanceWhite(low_img)
-
-plt.subplot(233);plt.imshow(convert(wb_img))
+wb = cv.xphoto.createGrayworldWB()
+wb.setSaturationThreshold(0.99)
+wb_img = wb.balanceWhite(convert(low_img))
+plt.subplot(233);plt.imshow(wb_img)
 
 # Denoise
 dn_img = cv.fastNlMeansDenoisingColored(wb_img,None,10,10,7,15)
-plt.subplot(234);plt.imshow(convert(dn_img))
+plt.subplot(234);plt.imshow(dn_img)
 
 # Sharpen
 def unsharp_mask(image, kernel_size = (5,5), sigma=1.0,amount=1.0,threshold=0):
@@ -35,7 +35,7 @@ def unsharp_mask(image, kernel_size = (5,5), sigma=1.0,amount=1.0,threshold=0):
     return sharpened
 
 sp_img = unsharp_mask(dn_img)
-plt.subplot(235);plt.imshow(convert(sp_img))
+plt.subplot(235);plt.imshow(sp_img)
 
 # Gamma Correction
 def adjust_gamma(image,gamma=1.0):
@@ -48,6 +48,6 @@ def adjust_gamma(image,gamma=1.0):
     return cv.LUT(image, table)
 
 gm_img = adjust_gamma(sp_img,2.0)
-plt.subplot(236);plt.imshow(convert(gm_img))
+plt.subplot(236);plt.imshow(gm_img)
 
 plt.show()
