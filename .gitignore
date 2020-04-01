@@ -1,11 +1,13 @@
 # data packet
 data/
 .idea/
+save_model
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-
+*
 # C extensions
 *.so
 
