@@ -6,13 +6,13 @@ from unet import UNet
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 cpu_device = torch.device("cpu")
 
-model_object = UNet(3).to(device)
+model_object = UNet().to(device)
 model_object.load_state_dict(torch.load('./save_model'))
 
-result_data_path = os.path.abspath("../data/train")
-origin_data_path = os.path.abspath("../data/trian_dark")
+result_data_path = os.path.abspath("../data/example/example_origin")
+origin_data_path = os.path.abspath("../data/example/example_dark")
 
-dataloaders = load_dataset(origin_data_path, result_data_path, 2)
+dataloaders = load_dataset(origin_data_path, result_data_path, 1)
 
 for index, (inputs, results) in enumerate(zip(dataloaders['origin_train'], dataloaders['target_train'])):
 

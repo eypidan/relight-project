@@ -12,7 +12,7 @@ def load_dataset(origin_data_path, target_data_path, batch_size=4):
             [torchvision.transforms.Resize((512, 512)), torchvision.transforms.ToTensor()])
     )
 
-    train_set, validation_set = torch.utils.data.random_split(train_dataset, [20000, len(train_dataset) - 20000])
+    train_set, validation_set = torch.utils.data.random_split(train_dataset, [int((len(train_dataset)*0.9)), len(train_dataset) - int((len(train_dataset)*0.9))])
     train_loader = torch.utils.data.DataLoader(
         train_set,
         batch_size=batch_size,
