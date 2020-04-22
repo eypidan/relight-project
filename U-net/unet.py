@@ -22,7 +22,6 @@ class UNet(nn.Module):
         self.dconv_down5 = double_conv(256, 512)
 
         self.maxpool = nn.MaxPool2d(2)
-        #self.upsample = nn.Upsample(size=,scale_factor=2, mode='bilinear', align_corners=True)
         self.upsample4 = nn.ConvTranspose2d(512, 256, kernel_size=2, stride=2)
         self.dconv_up4 = double_conv(512, 256)
 

@@ -6,11 +6,15 @@ from unet import UNet
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 cpu_device = torch.device("cpu")
 
+# load U-net model
 model_object = UNet().to(device)
-model_object.load_state_dict(torch.load('./save_model'))
-
-result_data_path = os.path.abspath("../data/example/example_origin")
-origin_data_path = os.path.abspath("../data/example/example_dark")
+if os.path.exists('./save_model'):
+    model_object.load_state_dict(torch.load('./save_model'))
+else:
+    print("No save_model file!")
+    exit(1)
+result_data_path = os.path.abspath("../data/mid_train")
+origin_data_path = os.path.abspath("../data/mid_train_dark")
 
 dataloaders = load_dataset(origin_data_path, result_data_path, 1)
 

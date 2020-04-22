@@ -2,6 +2,7 @@
 data/
 .idea/
 save_model
+model_state
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
