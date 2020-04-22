@@ -3,12 +3,13 @@ data/
 .idea/
 save_model
 model_state
-
+./U-net/model_state
+.vscode/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-
+.pytest_cache/
 # Distribution / packaging
 .Python
 build/
