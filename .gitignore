@@ -3,6 +3,7 @@ data/
 .idea/
 save_model
 model_state
+model_state_constant
 ./U-net/model_state
 .vscode/
 # Byte-compiled / optimized / DLL files
