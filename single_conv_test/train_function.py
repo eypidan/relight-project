@@ -12,7 +12,7 @@ def save_train_state(model_dict, best_loss, optimizer, epoch_number):
         'model_state_dict': model_dict,
         'optimizer_state_dict': optimizer.state_dict(),
         'best_loss': best_loss,
-    }, "./model_state")
+    }, "./model_state_constant")
 
 
 def calc_loss(pred, target, metrics):
@@ -32,13 +32,13 @@ def print_metrics(metrics, epoch_samples, phase):
 
 
 def train_model(model, optimizer, scheduler, num_epochs=5):
-    result_data_path = os.path.abspath("../data/mid_train")
-    origin_data_path = os.path.abspath("../data/mid_train_dark")
+    result_data_path = os.path.abspath("../data/small_train")
+    origin_data_path = os.path.abspath("../data/small_train_dark")
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-    if os.path.exists('./model_state'):
-        checkpoint = torch.load('./model_state')
+    if os.path.exists('./model_state_constant'):
+        checkpoint = torch.load('./model_state_constant')
         model.load_state_dict(checkpoint['model_state_dict'])
         optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         best_loss = checkpoint['best_loss']
