@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 import os
 
-file_dir = os.walk("../data/example/example_dark")
-save_dir = "../data/example/example_HG"
+file_dir = os.walk("../data/evaluation/dark_noise")
+save_dir = "../data/evaluation/HG"
 for path,dir_list,file_list in file_dir:
     # print(path)
     for file_name in file_list:

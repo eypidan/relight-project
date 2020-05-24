@@ -1,6 +1,7 @@
 import os
-import cv2
+import imageio
 import numpy as np
+from scipy.ndimage.filters import gaussian_filter
 
 file_dir = os.walk("../data/mid_train/1")
 save_dir = "../data/mid_train_dark_noise/1"
@@ -36,7 +37,7 @@ def noise(img):
 
     # speckle noise
     speckle=np.random.randn(row, col, ch)
-    noisySpeckle = img + img*speckle / 4.0
+    noisySpeckle = img + img*speckle / 10.0
 
     noisy = noisyGauss/4.0 + noisyPoisson/2.0 + noisySpeckle/4.0
     noisy[noisy > 255] = 255
@@ -48,7 +49,7 @@ def noise(img):
 def blur(img):
     kernel_size = (5, 5)
     sigma = 0.7
-    blur = cv2.GaussianBlur(img, kernel_size, sigma)
+    blur = gaussian_filter(img,sigma)
     return blur
 
 for path, dir_list, file_list in file_dir:
@@ -56,14 +57,14 @@ for path, dir_list, file_list in file_dir:
     for file_name in file_list:
         print("processing image:%s" % file_name)
         current_path = os.path.join(path, file_name)
-        image = cv2.imread(os.path.abspath(current_path))
+        image = imageio.imread(os.path.abspath(current_path))
 
         a = np.random.uniform(0.9, 1)
         b = np.random.uniform(0.5, 1)
         r = np.random.uniform(1.5, 5)
         darkImage = transform(image, a, b, r)
         noiseImage = noise(darkImage)
-        blurImage = blur(noiseImage)
-        cv2.imwrite(os.path.join(save_dir, file_name), blurImage)
+        # blurImage = blur(noiseImage)
+        imageio.imwrite(os.path.join(save_dir, file_name), noiseImage)
 
     print("Done. Save to " + save_dir)
